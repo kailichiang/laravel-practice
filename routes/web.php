@@ -12,5 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome', [
+    //     'name' => 'Laracast',
+    //     'age'  => '20'
+    // ]);
+    //
+    // return view('welcome')->with('name', 'world');
+
+    $tasks = [
+        'Go to the store',
+        'Finish my screencast',
+        'Clean the house'
+    ];
+    return view('welcome', compact('tasks'));
+});
+
+Route::get('about', function () {
+    return view('about');
 });
