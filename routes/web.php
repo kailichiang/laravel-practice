@@ -11,20 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome', [
-    //     'name' => 'Laracast',
-    //     'age'  => '20'
-    // ]);
-    //
-    // return view('welcome')->with('name', 'world');
+Route::get('/tasks', function () {
+//    $tasks = DB::table('tasks')->latest()->get();
+    $tasks = DB::table('tasks')->get();
+//    return $tasks;
+    return view('tasks.index', compact('tasks'));
+});
 
-    $tasks = [
-        'Go to the store',
-        'Finish my screencast',
-        'Clean the house'
-    ];
-    return view('welcome', compact('tasks'));
+Route::get('/tasks/{task}', function ($id) {
+//    dd($id);
+    $task = DB::table('tasks')->find($id);
+//    dd($task);
+    return view('tasks.show', compact('task'));
 });
 
 Route::get('about', function () {
