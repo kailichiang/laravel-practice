@@ -39,6 +39,12 @@ class PostsController extends Controller
 
         // Post::create(request()->all()); // dangerous
 
+        $this->validate(request(), [
+            // 'title' => 'required|max:10',
+            'title' => 'required',
+            'body'  => 'required'
+        ]);
+
         Post::create(request(['title', 'body']));
 
         // And redirect to the homepage
