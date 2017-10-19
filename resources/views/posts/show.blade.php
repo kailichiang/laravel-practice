@@ -28,7 +28,7 @@
         <hr>
 
         <div class="card">
-            <div class="card-block">
+            <div class="card-block comment-input">
                 <form method="POST" action="/posts/{{ $post->id }}/comments">
                     {{-- {{ method_field('PATCH') }} --}}
                     {{ csrf_field() }}
