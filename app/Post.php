@@ -12,6 +12,11 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function user() // $comment->post->user->name;
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function addComment($body)
     {
         // Comment::create([
