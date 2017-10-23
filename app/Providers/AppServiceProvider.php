@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // \DB::statement("SET lc_time_names = 'zh_TW'");
+        // \Carbon\Carbon::setLocale('zh_TW');
     }
 
     /**
