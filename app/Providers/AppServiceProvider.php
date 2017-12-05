@@ -15,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // \DB::statement("SET lc_time_names = 'zh_TW'");
         // \Carbon\Carbon::setLocale('zh_TW');
+        // \View::composer();
+        view()->composer('layouts.sidebar', function ($view) {
+            $view->with('archives', \App\Post::archives());
+        });
     }
 
     /**

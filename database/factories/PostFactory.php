@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,15 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Post::class, function (Faker $faker) {
+
+$factory->define(App\Post::class, function (Faker $faker, $attributes) {
+    static $user_id;
+
     return [
         'title' => $faker->sentence,
-        'body' => $faker->paragraph
+        'body' => $faker->paragraph,
+        'user_id' => $user_id ?: $user_id = 1,
+        'created_at' => Carbon::now()->subWeek(mt_rand(1,11)),
+        'updated_at' => Carbon::now()->subWeek(mt_rand(1,11))
     ];
 });

@@ -11,9 +11,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $usersCount = 3;
+        $postsCount = 10;
+        $commentsCount = 15;
+    
         // $this->call(UsersTableSeeder::class);
-        factory(App\Post::class, 3)->create()->each(function ($p) {
-            $p->comments()->save(factory(App\Comment::class)->make());
+        $users = factory(App\User::class, $usersCount)->create();
+        $posts = factory(App\Post::class, $postsCount)->create()
+            ->each(function($p) use ($users) {
+                $p->user_id = $users->random()->id;
+                $p->save();
+            });
+        $comments = factory(App\Comment::class, $commentsCount)->create()
+            ->each(function ($c) use ($posts, $users) {
+                $c->user_id = $users->random()->id;
+                $c->post_id = $posts->random()->id;
+                $c->save();
         });
     }
 }
