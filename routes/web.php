@@ -1,13 +1,5 @@
 <?php
 
-// App::bind('App\Billing\Stripe', function() {
-//     return new \App\Billing\Stripe(config('services.stripe.secret'));
-// });
-
-// App::singleton('App\Billing\Stripe', function() {
-//     return new \App\Billing\Stripe(config('services.stripe.secret'));
-// });
-
 // $stripe = App::make('App\Billing\Stripe');
 // $stripe = resolve('App\Billing\Stripe');
 // $stripe = app('App\Billing\Stripe');
@@ -19,6 +11,7 @@
 // App::instance('App\Billing\Stripe', $stripe);
 
 // dd($stripe);
+// dd(resolve('App\Billing\Stripe'));
 
 Route::get('/tasks', 'TasksController@index');
 Route::get('/tasks/{task}', 'TasksController@show');

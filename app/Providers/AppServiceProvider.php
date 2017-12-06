@@ -3,9 +3,17 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Billing\Stripe;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    // protected $defer = true;
+        
     /**
      * Bootstrap any application services.
      *
@@ -28,6 +36,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // App::bind('App\Billing\Stripe', function() {
+        //     return new \App\Billing\Stripe(config('services.stripe.secret'));
+        // });
+
+        $this->app->singleton(Stripe::class, function() {
+            return new Stripe(config('services.stripe.secret'));
+        });
+
+        // $this->app->singleton(Stripe::class, function(app) {
+        //     // app->make();
+        //     return new Stripe(config('services.stripe.secret'));
+        // });
     }
 }
