@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,14 +19,13 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $users = factory(App\User::class, $usersCount)->create();
         $posts = factory(App\Post::class, $postsCount)->create()
-            ->each(function($p) use ($users) {
-                $p->user_id = $users->random()->id;
+            ->each(function($p) {
+                $p->updated_at = $p->created_at = Carbon::now()->subWeek(mt_rand(1,11));
                 $p->save();
             });
         $comments = factory(App\Comment::class, $commentsCount)->create()
-            ->each(function ($c) use ($posts, $users) {
-                $c->user_id = $users->random()->id;
-                $c->post_id = $posts->random()->id;
+            ->each(function ($c) {
+                $c->updated_at = $c->created_at = Carbon::now()->subWeek(mt_rand(1,11));;
                 $c->save();
         });
     }
