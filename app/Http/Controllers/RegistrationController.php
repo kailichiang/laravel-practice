@@ -17,6 +17,11 @@ class RegistrationController extends Controller
     public function store(RegistrationForm $form)
     {
         $form->persist();
+
+        // request()->session();
+        // session('message', 'Here is a default message');
+        session()->flash('message', 'Thanks so much for signing up!');
+        
         // Redirect to the home page
         return redirect()->home();
     }
