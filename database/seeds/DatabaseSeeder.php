@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $usersCount = 3;
         $postsCount = 10;
         $commentsCount = 15;
+        $tagsCount = 5;
     
         // $this->call(UsersTableSeeder::class);
         $users = factory(App\User::class, $usersCount)->create();
@@ -27,6 +28,10 @@ class DatabaseSeeder extends Seeder
             ->each(function ($c) {
                 $c->updated_at = $c->created_at = Carbon::now()->subWeek(mt_rand(1,11));;
                 $c->save();
-        });
+            });
+        $tags = factory(App\Tag::class, $tagsCount)->create()
+            ->each(function ($t) use($posts) {
+                $t->posts()->attach($posts->random());
+            });
     }
 }
